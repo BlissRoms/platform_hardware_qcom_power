@@ -30,6 +30,7 @@ LOCAL_SHARED_LIBRARIES := \
     libhidlbase \
     libhidltransport \
     libhardware \
+    libhwbinder \
     libutils
 
 LOCAL_SRC_FILES := \
@@ -157,10 +158,14 @@ endif
 ifeq ($(TARGET_HAS_NO_WLAN_STATS),true)
 LOCAL_CFLAGS += -DNO_WLAN_STATS
 endif
+
+ifeq ($(TARGET_ARCH),arm)
+LOCAL_CFLAGS += -DARCH_ARM_32
+endif
+
 LOCAL_MODULE := android.hardware.power@1.1-service-qti
 LOCAL_INIT_RC := android.hardware.power@1.1-service-qti.rc
 LOCAL_SHARED_LIBRARIES += android.hardware.power@1.1
-endif
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := qcom
 LOCAL_VENDOR_MODULE := true
